@@ -1,4 +1,5 @@
 import pygame
+import radioSignalMinigame
 
 # pygame setup
 pygame.init()
@@ -8,6 +9,8 @@ running = True
 deltaTime = 0
 
 # player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+
+rsm = radioSignalMinigame.RadioSignalMinigame(screen)
 
 while running:
     # poll for events
@@ -30,6 +33,8 @@ while running:
     #     player_pos.x -= 300 * deltaTime
     # if keys[pygame.K_d]:
     #     player_pos.x += 300 * deltaTime
+
+    rsm.update()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
