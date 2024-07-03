@@ -9,12 +9,15 @@ class RadioSignalMinigame:
         for i in range(10):
             self.buttons.append(Button())
         self.highlighted_index = random.randint(0, len(self.buttons))
+        self.buttons[0].select()
 
-    def update(self):
+    def update(self, keys):
+        self.keys = keys
+
         x = 0
         for i in range(len(self.buttons)):
             if i == self.highlighted_index:
-                self.buttons[i].state = self.buttons[i].highlighted_red
+                self.buttons[i].highlight()
             self.screen.blit(self.buttons[i].state, (x, 0))
             x += 32
 
@@ -33,15 +36,29 @@ class Button:
         self.state = self.red
 
     def select(self):
-        if self.highlighted == True:
+        if self.highlighted:
             self.state = self.green
         else:
             self.state = self.yellow
         self.selected = True
     
     def deselect(self):
-        if self.highlighted == True:
+        if self.highlighted:
             self.state = self.highlighted_red
         else:
             self.state = self.red
         self.selected = False
+
+    def highlight(self):
+        if self.selected:
+            self.state = self.highlighted_green
+        else:
+            self.state = self.highlighted_red
+        self.highlighted = True
+
+    def unhighlight(self):
+        if self.selected:
+            self.state = self.highlighted_red
+        else:
+            self.state = self.highlighted_green
+        self.highlighted = False

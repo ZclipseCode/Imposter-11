@@ -7,6 +7,7 @@ screen = pygame.display.set_mode((500, 500))
 clock = pygame.time.Clock()
 running = True
 deltaTime = 0
+keys = pygame.key.get_pressed()
 
 # player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
@@ -18,6 +19,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    keys = pygame.key.get_pressed()
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("grey")
@@ -34,7 +37,7 @@ while running:
     # if keys[pygame.K_d]:
     #     player_pos.x += 300 * deltaTime
 
-    rsm.update()
+    rsm.update(keys)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
