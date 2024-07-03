@@ -5,16 +5,16 @@ import random
 class RadioSignalMinigame:
     def __init__(self, screen):
         self.screen = screen
-
         self.buttons = []
         for i in range(10):
             self.buttons.append(Button())
-        #random_index = random.randint(0, len(buttons))
+        self.highlighted_index = random.randint(0, len(self.buttons))
 
     def update(self):
         x = 0
         for i in range(len(self.buttons)):
-            self.screen.blit(self.buttons[i].state, (x, 0))
+            if i != self.highlighted_index:
+                self.screen.blit(self.buttons[i].state, (x, 0))
             x += 32
 
 class Button:
