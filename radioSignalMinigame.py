@@ -13,8 +13,9 @@ class RadioSignalMinigame:
     def update(self):
         x = 0
         for i in range(len(self.buttons)):
-            if i != self.highlighted_index:
-                self.screen.blit(self.buttons[i].state, (x, 0))
+            if i == self.highlighted_index:
+                self.buttons[i].state = self.buttons[i].highlighted_red
+            self.screen.blit(self.buttons[i].state, (x, 0))
             x += 32
 
 class Button:
