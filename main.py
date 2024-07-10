@@ -6,7 +6,7 @@ pygame.init()
 screen = pygame.display.set_mode((500, 500))
 clock = pygame.time.Clock()
 running = True
-deltaTime = 0
+delta_time = 0
 keys = pygame.key.get_pressed()
 
 # player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
@@ -37,7 +37,7 @@ while running:
     # if keys[pygame.K_d]:
     #     player_pos.x += 300 * deltaTime
 
-    rsm.update(keys)
+    rsm.update(keys, delta_time)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
@@ -45,6 +45,6 @@ while running:
     # limits FPS to 60
     # delta time in seconds since last frame, used for framerate-
     # independent physics.
-    deltaTime = clock.tick(60) / 1000
+    delta_time = clock.tick(60) / 1000
 
 pygame.quit()
