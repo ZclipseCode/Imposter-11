@@ -4,6 +4,7 @@ import random
 
 class RadioSignalMinigame:
     def __init__(self, screen):
+        # number buttons
         self.screen = screen
         self.buttons = []
         for i in range(10):
@@ -12,14 +13,19 @@ class RadioSignalMinigame:
         self.selected_index = 0
         self.select_button(self.selected_index)
 
+        # randomize number button
         self.randomize_timer = 0
         self.randomize_interval = 1
+
+        # dials
+        self.wasd_dial = Dial()
+        self.arrows_dial = Dial()
 
     def update(self, keys, delta_time):
         self.keys = keys
         self.player_input()
 
-        # randomize button
+        # randomize number button
         self.randomize_timer += delta_time
         if (self.randomize_timer > self.randomize_interval):
             self.randomize_timer = 0
@@ -28,12 +34,16 @@ class RadioSignalMinigame:
                 new_active_index = random.randint(0, len(self.buttons) - 1)
             self.activate_button(new_active_index)
 
-        x = 0
+        x = 100
         for i in range(len(self.buttons)):
             if i == self.active_index:
                 self.buttons[i].activate()
             self.screen.blit(self.buttons[i].state, (x, 0))
-            x += 32
+            x += 30
+        
+        # dials
+        self.screen.blit(self.wasd_dial.state, (50, 100))
+        self.screen.blit(self.arrows_dial.state, (300, 100))
     
     def player_input(self):
         if self.keys[pygame.K_1]:
@@ -108,3 +118,14 @@ class Button:
         else:
             self.state = self.red
         self.active = False
+
+class Dial:
+    def __init__(self):
+        dial_sprites = spriteSheet.SpriteSheet('Assets/Dial.png')
+        self.dial_correct = dial_sprites.get_image(0, 0, 32, 32)
+        self.dial_incorrect = dial_sprites.get_image(0, 32, 32, 32)
+        # increase image size
+        self.dial_correct = pygame.transform.scale(self.dial_correct, (150, 150))
+        self.dial_incorrect = pygame.transform.scale(self.dial_incorrect, (150, 150))
+
+        self.state = self.dial_incorrect
