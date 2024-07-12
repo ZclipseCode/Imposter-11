@@ -34,12 +34,12 @@ class RadioSignalMinigame:
                 new_active_index = random.randint(0, len(self.buttons) - 1)
             self.activate_button(new_active_index)
 
-        x = 100
+        x = 50
         for i in range(len(self.buttons)):
             if i == self.active_index:
                 self.buttons[i].activate()
             self.screen.blit(self.buttons[i].state, (x, 0))
-            x += 30
+            x += 40
         
         # dials
         self.screen.blit(self.wasd_dial.state, (50, 100))
@@ -86,6 +86,13 @@ class Button:
         self.highlighted_yellow = button_sprites.get_image(32, 32, 32, 32)
         self.red = button_sprites.get_image(0, 64, 32, 32)
         self.highlighted_red = button_sprites.get_image(32, 64, 32, 32)
+        # increase image size
+        self.green = pygame.transform.scale(self.green, (50, 50))
+        self.highlighted_green = pygame.transform.scale(self.highlighted_green, (50, 50))
+        self.yellow = pygame.transform.scale(self.yellow, (50, 50))
+        self.highlighted_yellow = pygame.transform.scale(self.highlighted_yellow, (50, 50))
+        self.red = pygame.transform.scale(self.red, (50, 50))
+        self.highlighted_red = pygame.transform.scale(self.highlighted_red, (50, 50))
 
         self.active = False
         self.selected = False
